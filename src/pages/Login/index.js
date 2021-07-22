@@ -7,7 +7,7 @@ import padlock from '../../assests/padlock.png';
 
 export default function Login() {
     return (
-        <div className="login-container">
+        <div className="global-container">
             <section className="form">
                 <img src={logo} alt="Login"/>
                 <form action="">

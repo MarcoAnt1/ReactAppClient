@@ -8,7 +8,7 @@ import logo from '../../assests/logo.svg';
 
 export default function NewBook() {
     return (
-        <div className="new-book-container">
+        <div className="global-container">
             <div className="content">
                 <section className="form">
                     <img src={logo} alt="Erudio"/>
@@ -20,10 +20,10 @@ export default function NewBook() {
                     </Link>
                 </section>
                 <form action="">
-                    <input placeholde="Title" />
-                    <input placeholde="Author" />
+                    <input placeholder="Title" />
+                    <input placeholder="Author" />
                     <input type="date" />
-                    <input placeholde="Price" />
+                    <input placeholder="Price" />
 
                     <button className="button" type="submit">Add</button>
                 </form>
