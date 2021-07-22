@@ -1,12 +1,12 @@
 import React from 'react';
 import './styles.css';
 
-import logo from '../../assests/logo.png';
-import login from '../../assests/login.png';
+import logo from '../../assests/logo.svg';
+import padlock from '../../assests/padlock.png';
 
 export default function Login() {
     return (
-        <div className="login container">
+        <div className="login-container">
             <section className="form">
                 <img src={logo} alt="Login"/>
                 <form action="">
@@ -17,7 +17,7 @@ export default function Login() {
                     <button className="button" type="submit">Login</button>
                 </form>
             </section>
-            <img src={login} alt="Login"/>
+            <img src={padlock} alt="Login"/>
         </div>       
     );
 }
