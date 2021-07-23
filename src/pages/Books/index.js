@@ -16,7 +16,7 @@ export default function Books() {
     const history = useHistory();
 
     useEffect(() => {
-        api.get('v1/api/Book/asc/5/1', {
+        api.get('v1/api/Book/asc/20/1', {
             headers: {
                 Authorization: `Bearer ${accessToken}`
             }
@@ -24,6 +24,43 @@ export default function Books() {
             setBooks(response.data.list)
         })
     }, [accessToken]);
+    
+    async function logout() {
+        try {
+            await api.get('v1/api/auth/revoke', {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            });
+            
+            localStorage.clear();
+            history.push('/');
+        } catch (error) {
+            alert('Logout failed! Try again!');
+        }
+    }
+
+    async function editBook(id) {
+        try {
+            history.push(`books/new/${id}`);
+        } catch (error) {
+            alert('Edit book failde! Try again!');
+        }
+    }
+
+    async function deleteBook(id) {
+        try {
+            await api.delete(`v1/api/book/${id}`, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`
+                }
+            });
+            
+            setBooks(books.filter(book => book.id !== id))
+        } catch (error) {
+            alert('Delete failde! Try again!');
+        }
+    }
 
     return(
         <div className="book-container">
@@ -31,8 +68,8 @@ export default function Books() {
                 <header>
                     <img src={logo} alt="Erudio"/>
                     <span>Welcome, <strong>{userName.toLowerCase()}</strong>!</span>
-                    <Link className="button" to="books/new">Add New Book</Link>
-                    <button type="button">
+                    <Link className="button" to="books/new/0">Add New Book</Link>
+                    <button onClick={logout} type="button">
                         <FiPower size={18} color="#251FC5" />
                     </button>
                 </header>
@@ -52,11 +89,11 @@ export default function Books() {
                             <strong>Release Date:</strong>
                             <p>{Intl.DateTimeFormat('pt-BR').format(new Date(book.launchDate))}</p>
 
-                            <button type="button">
+                            <button onClick={() => editBook(book.id)} type="button">
                                 <FiEdit size={20} color="#251FC5"/>
                             </button>
 
-                            <button type="button">
+                            <button onClick={() => deleteBook(book.id)} type="button">
                                 <FiTrash2 size={20} color="#251FC5"/>
                             </button>
                         </li>
